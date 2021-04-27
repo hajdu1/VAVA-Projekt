@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author Jakub
+ * Parent class representing all transaction types
+ * 
  */
 public abstract class Transaction {
     
@@ -21,16 +21,29 @@ public abstract class Transaction {
     private BigDecimal amount;
     private Date timestamp;
     
+    /**
+     * empty constructor to enable XMLEncoder serialization
+     */
     public Transaction() {
         
     }
 
+    /**
+     * Creates a new transaction
+     * @param initiatorAccount account of the customer that initiated the transaction
+     * @param amount amount of money present in transaction
+     * @param timestamp date and time of transaction
+     */
     public Transaction(Account initiatorAccount, BigDecimal amount, Date timestamp) {
         this.initiatorAccount = initiatorAccount;
         this.amount = amount.setScale(2, RoundingMode.HALF_UP);
         this.timestamp = timestamp;
     }
     
+    /**
+     *
+     * @return transaction timestamp in custom string format
+     */
     public String getStringTimestamp() {
         DateFormat custom = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return custom.format(this.timestamp);

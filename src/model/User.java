@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
- * @author Jakub
+ * Parent class representing all users of the app
+ * 
  */
 public abstract class User {
     
@@ -23,10 +23,23 @@ public abstract class User {
     private String email;
     private Date birthdate;
     
+    /**
+     * empty constructor to enable XMLEncoder serialization
+     */
     public User() {
          
     }
 
+    /**
+     * Creates a new user
+     * @param username login name
+     * @param password login password
+     * @param name first name
+     * @param surname last name
+     * @param address home address
+     * @param email email address
+     * @param birthdate date of birth
+     */
     public User(String username, String password, String name, String surname, String address, String email, Date birthdate) {
         this.username = username;
         this.password = password;
@@ -37,6 +50,10 @@ public abstract class User {
         this.birthdate = birthdate;
     }
     
+    /**
+     *
+     * @return date of birth in custom string format
+     */
     public String getStringBirthdate() {
         DateFormat custom = new SimpleDateFormat("dd.MM.yyyy");
         return custom.format(birthdate);

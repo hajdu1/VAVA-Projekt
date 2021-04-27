@@ -14,8 +14,8 @@ import java.util.Date;
 import javax.swing.DefaultListModel;
 
 /**
+ * Class representing bank accounts of customers
  *
- * @author Jakub
  */
 public class Account {
     
@@ -24,9 +24,19 @@ public class Account {
     private BigDecimal balance;
     private Customer owner;
 
+    /**
+     * empty constructor to enable XMLEncoder serialization
+     */
     public Account() {
     }
     
+    /**
+     * Creates a new bank account
+     * @param type type of bank account
+     * @param owner customer that owns this account
+     * @param existing existing accounts for comparison - to generate a unique IBAN
+     * @param bundle language I18N ResourceBuncle currently in use
+     */
     public Account(String type, Customer owner, DefaultListModel existing, java.util.ResourceBundle bundle) {
         this.type = type;
         this.iban = createIban(existing);
@@ -66,6 +76,11 @@ public class Account {
         return type;
     }
     
+    /**
+     * Overloaded account type getter
+     * @param bundle language I18N ResourceBuncle currently in use
+     * @return type of account in correct language
+     */
     public String getType(java.util.ResourceBundle bundle) {
         return bundle.getString(this.type.toUpperCase());
     }
@@ -98,16 +113,14 @@ public class Account {
         this.owner = owner;
     }
     
-    public String getAccountNumber(String iban) {
+    private String getAccountNumber(String iban) {
         return iban.substring(14, iban.length());
     }
 
-    // funkcia na doplnanie textu [spaces] * medzerou, odsadenie vlavo/vpravo
     private String odsadText(String text, int spaces) {
         return String.format("%1$" + String.valueOf(spaces) + "s", text);
     }
     
-    // vypocita potrebnu sirku stlpca s jednotkovou cenou tovaru
     private int odsadenieSuma(String initial, DefaultListModel accountTransactions) {
         int max = initial.length();
         for (int index = 0; index < accountTransactions.getSize(); index++) {
@@ -118,19 +131,24 @@ public class Account {
         return max + 1;
     }
     
-    // vlastny format vypisu datumu vystavenia faktury
     private String date(Date date, java.util.ResourceBundle bundle) {
         SimpleDateFormat customFormat = new SimpleDateFormat(bundle.getString("DD.MM.YYYY HH:MM:SS"));
         return customFormat.format(date); 
     } 
     
-    // skracuje text popisu tovaru na potrebnu dlzku a doplna koniec bodkami
-    // (ak treba)
     private String shortenPopis(String popis, int odsadenie) {
         if (popis.length() >= odsadenie) return popis.substring(0, odsadenie - 4) + "...";
         return popis;
     }
     
+    /**
+     * Generates an account report and writes it into a text file
+     * @param accountTransactions list of transactions of the account
+     * @param from date which all written transactions have to exceed
+     * @param to date which all written transactions cannot exceed
+     * @param bundle language I18N ResourceBundle currently in use
+     * @return true if file saved successfully, otherwise false
+     */
     public boolean generateAccountReport(DefaultListModel accountTransactions, Date from, Date to, java.util.ResourceBundle bundle) {
         try {          
             SimpleDateFormat fileNameFormat = new SimpleDateFormat(bundle.getString("DD_MM_YYYY"));

@@ -1,8 +1,0 @@
-Apr 27, 2021 12:30:17 AM view.MainFrame <init>
-INFO: ---- APP SESSION OPENED ----
-Apr 27, 2021 12:31:16 AM view.MainFrame btLoginActionPerformed
-WARNING: Incorrect login credentials were used.
-Apr 27, 2021 12:32:03 AM view.MainFrame btConfirmDepositActionPerformed
-WARNING: No unconfirmed deposit selected to confirm. (user: jarobucko)
-Apr 27, 2021 12:34:18 AM view.MainFrame formWindowClosing
-INFO: ---- APP SESSION CLOSED ----

@@ -9,15 +9,24 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- *
- * @author Jakub
+ * class representing money withdrawal transactions
+ * 
  */
 public class Withdrawal extends Transaction {
     
+    /**
+     * empty constructor to enable XMLEncoder serialization
+     */
     public Withdrawal() {
         super();
     }
     
+    /**
+     * Creates a new withdrawal transaction
+     * @param initiatorAccount account of the customer that withdrew money
+     * @param amount amount of money withdrawn
+     * @param timestamp date and time of transaction
+     */
     public Withdrawal(Account initiatorAccount, BigDecimal amount, Date timestamp) {
         super(initiatorAccount, amount, timestamp);
     }
