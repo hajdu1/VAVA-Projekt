@@ -237,8 +237,12 @@ public class MainFrame extends javax.swing.JFrame {
         Admin toAdd = new Admin("admin", "nbusr123", "Adam", "Adminovič", "Staromestská 3, 12345 Šaštín Stráže", "adam.admin@raybank.sk", createDate("1989-07-18"));
         boolean exists = false;
         for (User u : userList) {
-            if (toAdd.getUsername().equals(u.getUsername()) && toAdd.getPassword().equals(u.getPassword())) exists = true;
+            if (toAdd.getUsername().equals(u.getUsername()) && toAdd.getPassword().equals(u.getPassword())) {
+                exists = true;
+                break;
+            }
         }
+        
         if (!exists) {
             userList.add(toAdd);
             logger.log(Level.INFO, bundle.getString("ADMIN ACCOUNT WAS MISSING, CREATED NEW ADMIN ACCOUNT FROM SCRATCH."));
@@ -308,7 +312,10 @@ public class MainFrame extends javax.swing.JFrame {
     private boolean checkUniqueUsername(String username) {
         boolean unique = true;
         for (User u : userList) {
-            if (u.getUsername().equals(username)) unique = false;
+            if (u.getUsername().equals(username)) {
+                unique = false;
+                break;
+            }
         }
         
         return unique;
@@ -2053,6 +2060,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (User u : userList) {
             if (tfUsername.getText().equals(u.getUsername()) && String.valueOf(pfPassword.getPassword()).equals(u.getPassword())) {
                 loggedin = u;
+                break;
             }
         }
         

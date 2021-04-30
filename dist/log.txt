@@ -1,0 +1,6 @@
+Apr 30, 2021 1:46:30 PM view.MainFrame <init>
+INFO: ---- APP SESSION OPENED ----
+Apr 30, 2021 1:46:42 PM view.MainFrame btLoginActionPerformed
+WARNING: Incorrect login credentials were used.
+Apr 30, 2021 1:46:58 PM view.MainFrame formWindowClosing
+INFO: ---- APP SESSION CLOSED ----
